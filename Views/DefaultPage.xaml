@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.DefaultPage"
+             BindingContext="MauiApp1.ViewModels.DefaultPageViewModel"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:DataType="vm:DefaultPageViewModel"
+             Title="DefaultPage">
+    
+    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <!-- Display Default Page Content -->
+        <Label Text="Welcome to Your App!" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10"/>
+        <Button Text="Go to Search Page" Command="{Binding GoToSearchPageCommand}" />
+        <Button 
+            Text = "Go To Add Student Page"
+            Margin = "0,10,0,0"
+            Command="{Binding GoToAddStudentPageCommand}" />
+        <Button 
+            Text = "Go To Update Absence Page"
+            Margin = "0,10,0,0"
+            Command="{Binding GoToUpdateAbsencePageCommand}" />
+    </StackLayout>
+</ContentPage>

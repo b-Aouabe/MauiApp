@@ -1,0 +1,65 @@
+<!-- Views/SearchStudentPage.xaml -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.SearchStudentPage"
+             Title="SearchStudentPage"
+             xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             BindingContext="MauiApp1.ViewModels.SearchStudentViewModel"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:DataType="vm:SearchStudentViewModel"
+             mc:Ignorable="d"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <StackLayout VerticalOptions="FillAndExpand" BackgroundColor="#C1F2B0" Spacing="20" Padding="20">
+        <!-- Your existing XAML code remains unchanged -->
+
+        <!-- Title -->
+        <Label Text="Search a Student" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"  Margin="0,30,0,0"/>
+
+        <!-- Search Image -->
+        <Image Source="loupe.png" Aspect="AspectFit" HeightRequest="50" HorizontalOptions="Center" Margin="0,0,0,10"/>
+
+
+        <!-- Student Name Input -->
+        <Label Text="First Name" FontSize="14" Margin="0,0,0,-10"/>
+        <Entry Placeholder="Enter Student First Name" x:Name="studentFirstName" BackgroundColor="White" Text="{Binding FirstName, Mode=TwoWay}"/>
+        
+        <!-- Student Name Input -->
+        <Label Text="Last Name" FontSize="14" Margin="0,0,0,-10"/>
+        <Entry Placeholder="Enter Student Last Name" x:Name="studentLastName" BackgroundColor="White" Text="{Binding LastName, Mode=TwoWay}"/>
+
+        <!-- Field of Study Dropdown -->
+        <Picker Title="Select Field of Study" x:Name="fieldOfStudyPicker" BackgroundColor="White" SelectedItem="{Binding FieldOfStudy, Mode=TwoWay}" ItemsSource="{Binding Fields}" />
+            
+        <!--
+        <Picker.Items>
+                <x:String>Computer Science</x:String>
+                <x:String>Electrical Engineering</x:String>
+                <x:String>Civil Engineering</x:String>
+            
+        </Picker>
+        -->
+
+        <!-- Course Dropdown -->
+        <Picker Title="Select Course" x:Name="coursePicker" BackgroundColor="White" SelectedItem="{Binding Selectedlesson, Mode=TwoWay}" ItemsSource="{Binding Lessons}">
+            <Picker.Items>
+                <x:String>Programming with C#</x:String>
+                <x:String>Introduction to Programming</x:String>
+                <x:String>Database Management</x:String>
+                <x:String>Mecanics</x:String>
+                <!-- Add more options as needed -->
+            </Picker.Items>
+        </Picker>
+
+        <!-- Buttons with Vertical Alignment -->
+        <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+            <!-- Search Button -->
+            <Button Text="Search" Command="{Binding SearchCommand}" HorizontalOptions="FillAndExpand" BackgroundColor="#65B741" Margin="0,0,10,0"/>
+
+            <!-- Cancel and Clear Button -->
+            <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand" BackgroundColor="#65B741"/>
+        </StackLayout>
+    </StackLayout>
+
+</ContentPage>

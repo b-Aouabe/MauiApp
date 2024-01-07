@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.DetailsPage"
+             BindingContext="MauiApp1.ViewModels.StudentDetailsViewModel"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             x:DataType="vm:StudentDetailsViewModel"
+             Title="DetailsPage">
+    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <Label Text="{Binding FirstName}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" HorizontalTextAlignment="Center"/>
+        <Label Text="{Binding LastName}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" HorizontalTextAlignment="Center"/>
+        <Label Text="{Binding Lessonid}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10"/>
+        <Label Text="{Binding Abssences}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" BackgroundColor="Red" Padding="10"/>
+        <Label Text="{Binding Presences}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" BackgroundColor="Green" Padding="10"/>
+
+    </StackLayout>
+</ContentPage>

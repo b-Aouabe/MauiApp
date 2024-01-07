@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.AddStudentPage"
+             BindingContext="MauiApp1.ViewModels.AddStudentVM"
+             xmlns:models="clr-namespace:MauiApp1.Models"
+             xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             NavigationPage.HasNavigationBar="False"
+             x:DataType="vm:AddStudentVM"
+             Title="Add Student Page">
+    <ScrollView>
+        <VerticalStackLayout BackgroundColor="#C1F2B0">
+            <Image Source="student.png" WidthRequest="200" Margin="0,20,0,20"/>
+            <Entry Placeholder="Student ID" BackgroundColor="White" Margin="15" Text="{Binding IdentityNum}"/>
+            <Entry Placeholder="First Name" BackgroundColor="White" Margin="15" Text="{Binding FirstName}"/>
+            <Entry Placeholder="Last Name" BackgroundColor="White" Margin="15" Text="{Binding LastName}"/>
+            <Entry Placeholder="Email" BackgroundColor="White" Margin="15" Keyboard="Email" Text="{Binding Email}"/>
+            <Entry Placeholder="Phone Number" BackgroundColor="White" Margin="15" Keyboard="Telephone" Text="{Binding PhoneNumber}"/>
+            <Picker Margin="15" Title="Select Field of Study" x:Name="fieldOfStudyPicker" BackgroundColor="White" SelectedItem="{Binding Filiere}" ItemsSource="{Binding Filieres}"/>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Text="Cancel" FontSize="15" Margin="10" BackgroundColor="Red" Command="{Binding CancelCommand}"/>
+                <BoxView Grid.Column="1" BackgroundColor="Transparent" IsEnabled="False"/>
+                <Button Grid.Column="2" Text="Save" FontSize="15" Margin="10" Command="{Binding SaveCommand}"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
