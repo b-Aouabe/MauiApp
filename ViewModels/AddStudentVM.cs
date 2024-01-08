@@ -69,13 +69,14 @@ namespace MauiApp1.ViewModels
                     PhoneNumber = phoneNumber
                 };
                 await dbService.AddStudent(student);
+                await Shell.Current.DisplayAlert("Success", "Student Added  Successfully !", "Ok");
+                await Shell.Current.GoToAsync("..", animate: true);
             }
             else
             {
                 await Shell.Current.DisplayAlert("Error", "Some Field Are Not Set !", "Ok");
             }
             NumberOfStudents = (await dbService.GetAllStudents()).Count();
-            await Shell.Current.GoToAsync("..", animate: true);
         }
 
         [ObservableProperty]

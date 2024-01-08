@@ -13,8 +13,8 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.ViewModels
 {
-     public partial class SearchStudentViewModel : ObservableObject
-     {
+    public partial class SearchStudentViewModel : ObservableObject
+    {
         readonly LocalDbService dbService;
         public SearchStudentViewModel(LocalDbService dbService)
         {
@@ -22,11 +22,11 @@ namespace MauiApp1.ViewModels
             SetFields();
             SetLessons();
         }
-        [ObservableProperty]        
+        [ObservableProperty]
         private string firstName;
 
-        [ObservableProperty] 
-        private string lastName;   
+        [ObservableProperty]
+        private string lastName;
 
         [ObservableProperty]
         private Filiere fieldOfStudy;
@@ -40,21 +40,27 @@ namespace MauiApp1.ViewModels
         [ObservableProperty]
         ObservableCollection<Lesson> lessons = [];
 
-         [RelayCommand]
-         async Task Search()
+        [RelayCommand]
+        async Task Search()
         {
             //todo : search the student in the db
             // Create an instance of StudentModel with the entered information
-
-            try
+            if (FieldOfStudy == null || Selectedlesson == null || string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName)) 
             {
-                var student = await dbService.GetStudentByFirstLastName(FirstName, LastName);
-                var absenceHistory = await dbService.GetAbsencesByLessonStudent(selectedlesson.Id,student.Id);
-                await App.Current.MainPage.Navigation.PushAsync(new DetailsPage() { BindingContext = new StudentDetailsViewModel(absenceHistory,Selectedlesson.Label,student.FirstName+" "+student.LastName) });
+                await Shell.Current.DisplayAlert("Error", "All Fields Are Required !", "Ok");
             }
-            catch (Exception ex)
+            else
             {
-                await Shell.Current.DisplayAlert("Error","Error :"+ex.Message,"Ok");
+                try
+                {
+                    var student = await dbService.GetStudentByFirstLastName(FirstName, LastName);
+                    var absenceHistory = await dbService.GetAbsencesByLessonStudent(selectedlesson.Id, student.Id);
+                    await App.Current.MainPage.Navigation.PushAsync(new DetailsPage() { BindingContext = new StudentDetailsViewModel(absenceHistory, Selectedlesson.Label, student.FirstName + " " + student.LastName) });
+                }
+                catch (Exception ex)
+                {
+                    await Shell.Current.DisplayAlert("Error", "No Student Found With These Inputs!", "Ok");
+                }
             }
 
             // Navigate to the DetailsPage and pass the StudentModel

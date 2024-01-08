@@ -4,6 +4,7 @@
              x:Class="MauiApp1.Views.UpdateAbsencePage"
              BindingContext="MauiApp1.ViewModels.UpdateAbsenceVM"
              xmlns:vm="clr-namespace:MauiApp1.ViewModels"
+             xmlns:models="clr-namespace:MauiApp1.Models"
              x:DataType="vm:UpdateAbsenceVM"
              Title="Update Absence Page">
     <ScrollView>
@@ -12,25 +13,31 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="80"/>
                 </Grid.ColumnDefinitions>
-                <Picker Margin="15" Title="Filiere" BackgroundColor="White" SelectedItem="{Binding Filiere}" ItemsSource="{Binding Filieres}"/>
+                <Picker Margin="15" Title="Filiere" BackgroundColor="White" SelectedItem="{Binding Filiere}" ItemsSource="{Binding Filieres}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
                 <Picker Margin="15" Grid.Column="1" Title="Lesson" BackgroundColor="White" SelectedItem="{Binding Lesson}" ItemsSource="{Binding Lessons}" />
-                <Button Margin="0,15,5,13"  BackgroundColor="Red" Text="Show" Grid.Column="2" Command="{Binding SetStudentsCommand}"/>
             </Grid>
-            <ListView x:Name="studentsListView"
-                        ItemsSource="{Binding Students}">
-                <!--<ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <CheckBox IsChecked="False" />
-                                <Label Text="NAMENDJCDHCV SDFV" VerticalOptions="CenterAndExpand"/>
-                            </StackLayout>
-                        </ViewCell>
+            <CollectionView 
+                    ItemsSource="{Binding Students}"
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type models:Student}">
+                        <Grid Padding="0,5" Margin="10">
+                            <Frame>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding .}" FontSize="24"/>
+                                    <CheckBox IsChecked="{Binding IsChecked}" Grid.Column="1"/>
+                                </Grid>
+                            </Frame>
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>-->
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             <Grid Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

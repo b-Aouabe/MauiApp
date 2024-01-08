@@ -30,7 +30,7 @@
         <Entry Placeholder="Enter Student Last Name" x:Name="studentLastName" BackgroundColor="White" Text="{Binding LastName, Mode=TwoWay}"/>
 
         <!-- Field of Study Dropdown -->
-        <Picker Title="Select Field of Study" x:Name="fieldOfStudyPicker" BackgroundColor="White" SelectedItem="{Binding FieldOfStudy, Mode=TwoWay}" ItemsSource="{Binding Fields}" />
+        <Picker Title="Select Field of Study" x:Name="fieldOfStudyPicker" BackgroundColor="White" SelectedItem="{Binding FieldOfStudy, Mode=TwoWay}" ItemsSource="{Binding Fields}"  SelectedIndexChanged="fieldOfStudyPicker_SelectedIndexChanged" />
             
         <!--
         <Picker.Items>

@@ -79,7 +79,7 @@ namespace MauiApp1.ViewModels
         }
 
         [RelayCommand]
-        async Task SetStudents()
+        public async Task SetStudents()
         {
             List<Student> allStudents;
             if (Filiere == null)
@@ -106,10 +106,19 @@ namespace MauiApp1.ViewModels
         [RelayCommand]
         async Task Save()
         {
-
+            if (Lesson == null || Filiere == null)
+            {
+                await Shell.Current.DisplayAlert("Error", "Lession And Field Must Be Set !", "Ok");
+            }
+            else
+            {
+                await UpdateAbsences();
+                await Shell.Current.GoToAsync("..",animate:true);
+            }
         }
 
-        async Task OnSubmitChangesClicked(object sender, EventArgs e)
+
+        async Task UpdateAbsences()
         {
             // Handle the Submit Changes button click
             var checkedStudents = Students.Where(student => student.IsChecked).ToList();
@@ -129,10 +138,7 @@ namespace MauiApp1.ViewModels
                 await dbService.UpdateAbsenceHistory(absenceTable);
             }
 
-            // Here, you can update the database with the modified students' data
-            // For demonstration, we'll display a message
-            //DisplayAlert("Changes Submitted", "Changes have been submitted!", "OK");
-            await Shell.Current.GoToAsync("..");
+            await Shell.Current.DisplayAlert("Success","Absences Saved  Successfully !","Ok");
         }
     }
 }

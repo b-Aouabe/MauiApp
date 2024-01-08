@@ -8,6 +8,15 @@ public partial class SearchStudentPage : ContentPage
 	public SearchStudentPage()
 	{
 		InitializeComponent();
-		BindingContext = new SearchStudentViewModel(new LocalDbService());
+        AppShell.SetNavBarIsVisible(this, false);
+        BindingContext = new SearchStudentViewModel(new LocalDbService());
 	}
+
+    private void fieldOfStudyPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (BindingContext is SearchStudentViewModel obj)
+        {
+            obj.SetLessons();
+        }
+    }
 }

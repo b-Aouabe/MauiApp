@@ -23,7 +23,7 @@ namespace MauiApp1.DbConfig
         }
         public async Task<Student> GetStudentByFirstLastName(string first,string last)
         {
-            return await _connection.Table<Student>().Where(x => x.FirstName == first && x.LastName == last).FirstOrDefaultAsync();
+            return await _connection.Table<Student>().Where(x => x.FirstName.ToLower() == first.ToLower() && x.LastName.ToLower() == last.ToLower()).FirstOrDefaultAsync();
         }
         public async Task<Student> GetStudentById(int id)
         {
@@ -83,7 +83,20 @@ namespace MauiApp1.DbConfig
         }
         public async Task<AbsenceHistory> GetAbsencesByLessonStudent(int LessonId,int StudentId)
         {
-            return await _connection.Table<AbsenceHistory>().Where(x => x.LessonId == LessonId && x.StudentId == StudentId).FirstOrDefaultAsync();
+            AbsenceHistory absence;
+            absence = await _connection.Table<AbsenceHistory>().Where(x => x.LessonId == LessonId && x.StudentId == StudentId).FirstOrDefaultAsync();
+            if (absence == null)
+            {
+                absence = new AbsenceHistory()
+                {
+                    StudentId = StudentId,
+                    LessonId = LessonId,
+                    Presences = 0,
+                    Abscences = 0
+                };
+                await AddAbsence(absence);
+            }
+            return absence;
         }
         public async Task UpdateAbsenceHistory(AbsenceHistory absenceHistory)
         {

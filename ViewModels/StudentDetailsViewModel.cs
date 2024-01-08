@@ -17,17 +17,17 @@ namespace MauiApp1.ViewModels
         private string lesson;
 
         [ObservableProperty]
-        private int absences = 0;
+        private string absences;
 
         [ObservableProperty]
-        private int presences = 0;
+        private string presences;
 
         public StudentDetailsViewModel (AbsenceHistory histoy,string lessonName,string studentName)
         {
             this.lesson = lessonName;
             this.studentName = studentName;
-            Presences = histoy.Presences;
-            Absences = histoy.Abscences;
+            Presences = $"Presences : {histoy.Presences}";
+            Absences = $"Absences : {histoy.Abscences}";
         }
 
 

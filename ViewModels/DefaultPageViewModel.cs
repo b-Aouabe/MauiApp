@@ -44,6 +44,37 @@ namespace MauiApp1.ViewModels
             //await App.Current.MainPage.Navigation.PushAsync(new UpdateAbsencePage());
         }
 
+        static List<Student> GenerateStudents()
+        {
+            List<Student> students = new List<Student>();
+
+            string[] firstNames = { "Liam", "Emma", "Noah", "Olivia", "Sophia", "Jackson", "Ava", "Isabella", "Lucas", "Mia", "Liam", "Ethan", "Oliver", "Aiden", "Harper", "Ella", "Mila", "Emily", "Amelia", "Abigail", "Aiden", "Jackson", "Madison", "Avery", "Evelyn" };
+
+            string[] lastNames = { "Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Jackson", "Taylor", "Thomas", "Harris", "Moore", "Martin", "White", "Hall", "Thompson", "Gomez", "Walker", "Perez", "Turner", "Lopez", "Cooper" };
+
+            for (int i = 1; i <= 25; i++)
+            {
+                students.Add(new Student
+                {
+                    Id = i,
+                    FirstName = firstNames[i - 1],
+                    LastName = lastNames[i - 1],
+                    Email = $"{firstNames[i - 1].ToLower()}.{lastNames[i - 1].ToLower()}@example.com",
+                    StudentNum = $"55555{i}",
+                    PhoneNumber = $"555-5555{i}",
+                    FieldId = (i - 1) / 5 + 1 // Distribute FieldId in groups of 5
+                });
+            }
+
+            return students;
+        }
+
+        [RelayCommand]
+        async Task Logout()
+        {
+            await Shell.Current.GoToAsync("..");
+        }
+
         [RelayCommand]
         async Task GenerateDb()
         {
@@ -52,7 +83,8 @@ namespace MauiApp1.ViewModels
                     new Filiere { Id = 1,Label="Genie Informatique" },
                     new Filiere { Id = 2,Label ="Genie Industriel" },
                     new Filiere { Id = 3,Label ="Genie Raiseaux et Telecommunication"},
-                    new Filiere { Id = 3, Label ="Genie Aeronotique"},
+                    new Filiere { Id = 4, Label ="Genie Aeronotique"},
+                    new Filiere { Id = 5, Label ="Genie De Procedes"},
                 ];
 
             foreach (var filiere in filieres)
@@ -62,13 +94,35 @@ namespace MauiApp1.ViewModels
 
             List<Lesson> lessons = 
                 [
-                    new Lesson { Id = 1, Label = "c#", FieldId = 1 },
-                    new Lesson { Id = 2, Label = "java", FieldId = 1 },
-                    new Lesson { Id = 3, Label = "php", FieldId = 1 },
-                    new Lesson { Id = 4, Label = "analyse de donnees", FieldId = 1 },
-                    new Lesson { Id = 5, Label = "python", FieldId = 1 },
-                    new Lesson { Id = 6, Label = "management", FieldId = 2 },
-                    new Lesson { Id = 7, Label = "Maintenance", FieldId = 2 }
+                    new Lesson { Id = 1, Label = "Programmation avancée", FieldId = 1 },
+                    new Lesson { Id = 2, Label = "Systèmes d'exploitation", FieldId = 1 },
+                    new Lesson { Id = 3, Label = "Réseaux informatiques", FieldId = 1 },
+                    new Lesson { Id = 4, Label = "Intelligence artificielle", FieldId = 1 },
+                    new Lesson { Id = 5, Label = "Développement web", FieldId = 1 },
+
+                    new Lesson { Id = 6, Label = "Gestion de la production", FieldId = 2 },
+                    new Lesson { Id = 7, Label = "Optimisation industrielle", FieldId = 2 },
+                    new Lesson { Id = 8, Label = "Conception et amélioration", FieldId = 2 },
+                    new Lesson { Id = 9, Label = "Contrôle de la qualité", FieldId = 2 },
+                    new Lesson { Id = 10, Label = "Chaîne d'approvisionnement", FieldId = 2 },
+
+                    new Lesson { Id = 11, Label = "Architecture des réseaux", FieldId = 3 },
+                    new Lesson { Id = 12, Label = "Protocoles de communication", FieldId = 3 },
+                    new Lesson { Id = 13, Label = "Sécurité des réseaux", FieldId = 3 },
+                    new Lesson { Id = 14, Label = "Télécommunications sans fil", FieldId = 3 },
+                    new Lesson { Id = 15, Label = "Administration des systèmes réseau", FieldId = 3 },
+
+                    new Lesson { Id = 16, Label = "Aérodynamique", FieldId = 4 },
+                    new Lesson { Id = 17, Label = "Propulsion aérospatiale", FieldId = 4 },
+                    new Lesson { Id = 18, Label = "Structures aéronautiques", FieldId = 4 },
+                    new Lesson { Id = 19, Label = "Systèmes de navigation aérienne", FieldId = 4 },
+                    new Lesson { Id = 20, Label = "Conception d'aéronefs", FieldId = 4 },
+
+                    new Lesson { Id = 21, Label = "Thermodynamique appliquée", FieldId = 5 },
+                    new Lesson { Id = 22, Label = "Génie chimique", FieldId = 5 },
+                    new Lesson { Id = 23, Label = "Contrôle des procédés industriels", FieldId = 5 },
+                    new Lesson { Id = 24, Label = "Gestion des installations de production", FieldId = 5 },
+                    new Lesson { Id = 25, Label = "Séparation des fluides", FieldId = 5 }
                 ];
 
             foreach (var lesson in lessons)
@@ -76,22 +130,7 @@ namespace MauiApp1.ViewModels
                 await dbService.AddLesson(lesson);
             }
 
-            List<Student> students = new List<Student>
-                {
-                    new Student { Id=1, FirstName="John", LastName="Doe", Email="john.doe@example.com", StudentNum="12345", PhoneNumber="555-1234", FieldId=1 },
-                    new Student { Id=2, FirstName="Jane", LastName="Doe", Email="jane.doe@example.com", StudentNum="67890", PhoneNumber="555-5678", FieldId=2 },
-                    new Student { Id=3, FirstName="Michael", LastName="Smith", Email="michael.smith@example.com", StudentNum="11111", PhoneNumber="555-1111", FieldId=3 },
-                    new Student { Id=4, FirstName="Emily", LastName="Johnson", Email="emily.johnson@example.com", StudentNum="22222", PhoneNumber="555-2222", FieldId=4 },
-                    new Student { Id=5, FirstName="Daniel", LastName="Williams", Email="daniel.williams@example.com", StudentNum="33333", PhoneNumber="555-3333", FieldId=5 },
-                    new Student { Id=6, FirstName="Sophia", LastName="Davis", Email="sophia.davis@example.com", StudentNum="44444", PhoneNumber="555-4444", FieldId=1 },
-                    new Student { Id=7, FirstName="Liam", LastName="Brown", Email="liam.brown@example.com", StudentNum="55555", PhoneNumber="555-5555", FieldId=2 },
-                    new Student { Id=8, FirstName="Olivia", LastName="Miller", Email="olivia.miller@example.com", StudentNum="66666", PhoneNumber="555-6666", FieldId=3 },
-                    new Student { Id=9, FirstName="Ethan", LastName="Taylor", Email="ethan.taylor@example.com", StudentNum="77777", PhoneNumber="555-7777", FieldId=4 },
-                    new Student { Id=10, FirstName="Ava", LastName="Anderson", Email="ava.anderson@example.com", StudentNum="88888", PhoneNumber="555-8888", FieldId=5 },
-                    new Student { Id=11, FirstName="Mia", LastName="Moore", Email="mia.moore@example.com", StudentNum="99999", PhoneNumber="555-9999", FieldId=1 },
-                    new Student { Id=12, FirstName="Noah", LastName="Jones", Email="noah.jones@example.com", StudentNum="10101", PhoneNumber="555-1010", FieldId=2 },
-                    new Student { Id=13, FirstName="Emma", LastName="Thomas", Email="emma.thomas@example.com", StudentNum="12121", PhoneNumber="555-1212", FieldId=3 }
-                };
+            List<Student> students = GenerateStudents();
 
 
             foreach (var student in students)

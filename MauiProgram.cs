@@ -25,12 +25,12 @@ namespace MauiApp1
                     fonts.AddFont("BarlowSemiBold.otf", "BarlowSemiBold");
                 });
 
-            builder.Services.AddSingleton<AddStudentPage>();
+            builder.Services.AddTransient<AddStudentPage>();
             builder.Services.AddSingleton<DefaultPage>();
             builder.Services.AddSingleton<UpdateAbsencePage>();
 
 
-            builder.Services.AddSingleton<AddStudentVM>();
+            builder.Services.AddTransient<AddStudentVM>();
             builder.Services.AddSingleton<DefaultPageViewModel>();
             builder.Services.AddSingleton<UpdateAbsenceVM>();
 

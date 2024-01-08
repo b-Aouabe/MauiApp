@@ -8,5 +8,7 @@ public partial class DefaultPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = vm;
-	}
+
+        AppShell.SetNavBarIsVisible(this, false);
+    }
 }
