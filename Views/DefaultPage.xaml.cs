@@ -4,9 +4,9 @@ namespace MauiApp1.Views;
 
 public partial class DefaultPage : ContentPage
 {
-	public DefaultPage()
+	public DefaultPage(DefaultPageViewModel vm)
 	{
 		InitializeComponent();
-		BindingContext = new DefaultPageViewModel();
+		BindingContext = vm;
 	}
 }

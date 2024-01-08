@@ -26,9 +26,13 @@ namespace MauiApp1
                 });
 
             builder.Services.AddSingleton<AddStudentPage>();
+            builder.Services.AddSingleton<DefaultPage>();
+            builder.Services.AddSingleton<UpdateAbsencePage>();
 
 
             builder.Services.AddSingleton<AddStudentVM>();
+            builder.Services.AddSingleton<DefaultPageViewModel>();
+            builder.Services.AddSingleton<UpdateAbsenceVM>();
 
 
             builder.Services.AddSingleton<LocalDbService>();

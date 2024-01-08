@@ -4,9 +4,17 @@ namespace MauiApp1.Views;
 
 public partial class UpdateAbsencePage : ContentPage
 {
-	public UpdateAbsencePage()
+	public UpdateAbsencePage(UpdateAbsenceVM vm)
 	{
 		InitializeComponent();
-		BindingContext = new UpdateAbsenceVM();
+		BindingContext = vm;
 	}
+
+    private void Picker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+		if (BindingContext is UpdateAbsenceVM obj)
+		{
+			obj.SetLessons();
+		}
+    }
 }

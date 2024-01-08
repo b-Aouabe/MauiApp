@@ -11,6 +11,7 @@
     <ScrollView>
         <VerticalStackLayout BackgroundColor="#C1F2B0">
             <Image Source="student.png" WidthRequest="200" Margin="0,20,0,20"/>
+            <Label Text="{Binding NumberOfStudents}"/>
             <Entry Placeholder="Student ID" BackgroundColor="White" Margin="15" Text="{Binding IdentityNum}"/>
             <Entry Placeholder="First Name" BackgroundColor="White" Margin="15" Text="{Binding FirstName}"/>
             <Entry Placeholder="Last Name" BackgroundColor="White" Margin="15" Text="{Binding LastName}"/>

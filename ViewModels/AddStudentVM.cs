@@ -6,11 +6,26 @@ using System.Collections.ObjectModel;
 
 namespace MauiApp1.ViewModels
 {
-    public partial class AddStudentVM(LocalDbService dbService) : ObservableObject
+    public partial class AddStudentVM: ObservableObject
     {
-        public readonly LocalDbService dbService = dbService;
+        public readonly LocalDbService dbService ;
         [ObservableProperty]
         string title="Add Student Page";
+
+        public AddStudentVM(LocalDbService dbService)
+        {
+            this.dbService = dbService;
+            SetFields();
+        }
+
+        async Task SetFields()
+        {
+            var allFields = await dbService.GetAllFields();
+            foreach (var obj in allFields)
+            {
+                Filieres.Add(obj);
+            }
+        }
 
         [ObservableProperty]
         string firstName;
@@ -28,10 +43,7 @@ namespace MauiApp1.ViewModels
         string phoneNumber;
 
         [ObservableProperty]
-        ObservableCollection<Filiere> filieres = [
-            new Filiere { Id = 1,Label="fdffr" },
-            new Filiere { Id = 2,Label="gtgtgt" }
-            ];
+        ObservableCollection<Filiere> filieres=[];
 
         [ObservableProperty]
         Filiere filiere;
@@ -46,7 +58,45 @@ namespace MauiApp1.ViewModels
         async Task Save()
         {
             string data = $"First Name ={FirstName} - LastName ={LastName} \nEmail ={Email} - IdentityNum ={IdentityNum}\n PhoneNumber = {PhoneNumber} -Filiere ={Filiere}";
-            await Shell.Current.DisplayAlert("Message", data, "Ok");
+            if (AreStringsSet(FirstName, LastName, Email, identityNum, phoneNumber) & Filiere != null)
+            {
+                var student = new Student()
+                {
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    Email = Email,
+                    StudentNum = identityNum,
+                    PhoneNumber = phoneNumber
+                };
+                await dbService.AddStudent(student);
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", "Some Field Are Not Set !", "Ok");
+            }
+            NumberOfStudents = (await dbService.GetAllStudents()).Count();
+            await Shell.Current.GoToAsync("..", animate: true);
+        }
+
+        [ObservableProperty]
+        int numberOfStudents;
+        public static bool AreStringsSet(params string[] attributes)
+        {
+            foreach (var attribute in attributes)
+            {
+                if (!IsStringSet(attribute))
+                {
+                    return false; // If any attribute is not set, return false
+                }
+            }
+
+            return true; // All attributes are set
+        }
+
+        public static bool IsStringSet(string attribute)
+        {
+            // You can modify this method based on your actual check
+            return !string.IsNullOrEmpty(attribute);
         }
     }
 }

@@ -7,10 +7,9 @@
              x:DataType="vm:StudentDetailsViewModel"
              Title="DetailsPage">
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-        <Label Text="{Binding FirstName}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" HorizontalTextAlignment="Center"/>
-        <Label Text="{Binding LastName}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" HorizontalTextAlignment="Center"/>
-        <Label Text="{Binding Lessonid}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10"/>
-        <Label Text="{Binding Abssences}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" BackgroundColor="Red" Padding="10"/>
+        <Label Text="{Binding StudentName}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" HorizontalTextAlignment="Center"/>
+        <Label Text="{Binding Lesson}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10"/>
+        <Label Text="{Binding Absences}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" BackgroundColor="Red" Padding="10"/>
         <Label Text="{Binding Presences}" FontSize="20" FontAttributes="Bold" Margin="0,0,0,10" BackgroundColor="Green" Padding="10"/>
 
     </StackLayout>

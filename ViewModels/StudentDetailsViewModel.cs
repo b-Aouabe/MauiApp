@@ -1,12 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MauiApp1.DbConfig;
 using MauiApp1.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MauiApp1.ViewModels
 { 
@@ -15,27 +9,25 @@ namespace MauiApp1.ViewModels
 
         //after getting the student and the course from the search page here i will search in the abssences table
         //for the total abssebces and presences of that student in that specific course
+        [ObservableProperty]
+        private string studentName;
+
 
         [ObservableProperty]
-        private string firstName;
+        private string lesson;
 
         [ObservableProperty]
-        private string lastName;
-
-        [ObservableProperty]
-        private int lessonid;
-
-        [ObservableProperty]
-        private int abssences = 0;
+        private int absences = 0;
 
         [ObservableProperty]
         private int presences = 0;
 
-        public StudentDetailsViewModel (Student student, Lesson lesson)
+        public StudentDetailsViewModel (AbsenceHistory histoy,string lessonName,string studentName)
         {
-            this.firstName = student.FirstName;
-            this.lastName = student.LastName;
-            this.lessonid = lesson.Id;
+            this.lesson = lessonName;
+            this.studentName = studentName;
+            Presences = histoy.Presences;
+            Absences = histoy.Abscences;
         }
 
 

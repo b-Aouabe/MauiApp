@@ -6,10 +6,42 @@
              xmlns:vm="clr-namespace:MauiApp1.ViewModels"
              x:DataType="vm:UpdateAbsenceVM"
              Title="Update Absence Page">
-    <VerticalStackLayout>
-        <Label 
-            Text="{Binding Title}"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout BackgroundColor="#C1F2B0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <Picker Margin="15" Title="Filiere" BackgroundColor="White" SelectedItem="{Binding Filiere}" ItemsSource="{Binding Filieres}"/>
+                <Picker Margin="15" Grid.Column="1" Title="Lesson" BackgroundColor="White" SelectedItem="{Binding Lesson}" ItemsSource="{Binding Lessons}" />
+                <Button Margin="0,15,5,13"  BackgroundColor="Red" Text="Show" Grid.Column="2" Command="{Binding SetStudentsCommand}"/>
+            </Grid>
+            <ListView x:Name="studentsListView"
+                        ItemsSource="{Binding Students}">
+                <!--<ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <CheckBox IsChecked="False" />
+                                <Label Text="NAMENDJCDHCV SDFV" VerticalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>-->
+            </ListView>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Text="Cancel" FontSize="15" Margin="10" BackgroundColor="Red" Command="{Binding CancelCommand}"/>
+                <BoxView Grid.Column="1" BackgroundColor="Transparent" IsEnabled="False"/>
+                <Button Grid.Column="2" Text="Save" FontSize="15" Margin="10" Command="{Binding SaveCommand}"/>
+            </Grid>
+        </VerticalStackLayout> 
+    </ScrollView>
 </ContentPage>

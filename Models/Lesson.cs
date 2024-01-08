@@ -9,7 +9,7 @@ namespace MauiApp1.Models
         [AutoIncrement]
         public int Id { get; set; }
         public string Label { get; set; }
-        public int TeacherId { get; set; }
+        public int FieldId { get; set; }
 
         public override string ToString()
         {

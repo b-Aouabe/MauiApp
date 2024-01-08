@@ -15,5 +15,10 @@ namespace MauiApp1.Models
         public string StudentNum { get; set; }
         public string PhoneNumber{ get; set; }
         public int FieldId { get; set; }
+        public bool IsChecked = false;
+        public override string ToString()
+        {
+            return FirstName + " " + LastName;
+        }
     }
 }

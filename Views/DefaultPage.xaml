@@ -19,5 +19,10 @@
             Text = "Go To Update Absence Page"
             Margin = "0,10,0,0"
             Command="{Binding GoToUpdateAbsencePageCommand}" />
+        <Button
+            Text = "generate"
+            Margin = "0,10,0,0"
+            BackgroundColor="Red"
+            Command="{Binding GenerateDbCommand}" />
     </StackLayout>
 </ContentPage>
